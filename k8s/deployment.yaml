@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-watch
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: deploy-watch
+  template:
+    metadata:
+      labels:
+        app: deploy-watch
+    spec:
+      containers:
+        - name: deploy-watch
+          image: deploy-watch:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5001
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5001
+            initialDelaySeconds: 5
+            periodSeconds: 10
