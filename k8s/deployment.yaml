@@ -14,8 +14,7 @@ spec:
     spec:
       containers:
         - name: deploy-watch
-          image: deploy-watch:latest
-          imagePullPolicy: Never
+          image: ghcr.io/anthonysoltvedt/deploy-watch:latest
           ports:
             - containerPort: 5001
           livenessProbe:
