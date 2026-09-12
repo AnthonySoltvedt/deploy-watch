@@ -15,9 +15,16 @@ spec:
       containers:
         - name: deploy-watch
           image: ghcr.io/anthonysoltvedt/deploy-watch:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 5001
           livenessProbe:
+            httpGet:
+              path: /health
+              port: 5001
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
             httpGet:
               path: /health
               port: 5001
